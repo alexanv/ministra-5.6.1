@@ -6,7 +6,13 @@ if (empty($_GET['token'])) {
     \header($_SERVER['SERVER_PROTOCOL'] . ' 403 Forbidden');
     exit;
 }
-$uid = \Ministra\Lib\Itv::checkTemporaryLink($_GET['token']);
+
+if (stripos($_GET['media_request'], 'vod_file')) {
+    $uid = \Ministra\Lib\Master::checkTemporaryLink($_GET['token']);
+}else{
+    $uid = \Ministra\Lib\Itv::checkTemporaryLink($_GET['token']);
+}
+
 if (!$uid) {
     \header($_SERVER['SERVER_PROTOCOL'] . ' 403 Forbidden');
 } else {
