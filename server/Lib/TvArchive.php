@@ -96,6 +96,7 @@ class TvArchive extends \Ministra\Lib\Master implements \Ministra\Lib\StbApi\TvA
                 $link = $dvr->getArchiveLink($start_timestamp, $duration);
                 $res['cmd'] = $link . '?token=' . $this->createTemporaryToken($this->stb->id);
                 $res['download_cmd'] = $dvr->getDownloadLinkTs($start_timestamp, $duration);
+                $res['download_cmd'] .= '?token=' . $this->createTemporaryToken($this->stb->id);
             } else {
                 echo $dvr->ErrorMessage();
                 $res['error'] = 'server_error';
